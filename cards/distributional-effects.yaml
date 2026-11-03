@@ -1,0 +1,65 @@
+schema_version: "1.0.0"
+id: distributional-effects
+title: Distributional effects
+version: "0.1.0"
+status: draft
+category: distributional
+purpose: >
+  Describes how outcomes, failures, and adverse effects are distributed across
+  affected groups — so aggregate averages cannot hide who bears the costs.
+decision_use: >
+  Informs go/no-go and scope decisions for medium/high-risk use cases, and
+  where additional guardrails or exclusions are needed before scale-up.
+formula: >
+  For each required outcome/failure measure (e.g., task success, defect rate,
+  exception/escalation burden, latency, denial/rejection rates), the between-
+  group comparison across documented affected-group segments: group values
+  side by side with the difference and ratio vs the best-served group, plus
+  group volumes. Aggregates are never reported without their distribution.
+unit: percent / rate per group (differences and ratios unit-free)
+denominator: >
+  Per group: the same denominator rule as the underlying measure, applied
+  within the group. Group definitions (segments, attributes, source of
+  attribute data, and any imputation) are versioned — attribute provenance is
+  itself a fairness question.
+inclusions:
+  - Groups defined by the use case's affected-party analysis (customers, workers, applicants, regions, accessibility needs, or other documented segments)
+  - Intersectional cuts where volume permits (report with small-cell suppression)
+exclusions: []
+data_source: >
+  The underlying measures' sources joined to group attributes held under the
+  privacy/data policy; attribute joins documented and minimized.
+sampling: >
+  Follows the underlying measures. Small-group volumes are a first-class
+  result: report confidence intervals and suppress cells below the disclosure
+  threshold rather than showing noise.
+time_window: Baseline before change; quarterly after
+owner_role: Risk/control owner with the affected-stakeholder representative
+baseline_requirement: >
+  Pre-change distributional baseline on identical group definitions; group
+  definition changes re-baseline and require an ADR note.
+target_guidance: >
+  Set from the use case's fairness/obligations context (e.g., "no group's
+  success rate more than 5 percentage points below the best-served group;
+  no group bears >1.5× the exception burden"). Targets are context-specific;
+  publish the rationale.
+uncertainty: >
+  Small groups → wide intervals; between-group gaps smaller than the
+  measurement uncertainty must be labeled indeterminate, not "equal".
+  Group-attribute error (imputation, outdated records) can manufacture or
+  mask gaps — document attribute quality.
+limitations:
+  - Choosing segment axes is a judgment; unchosen axes are invisible — the affected-party analysis governs and is reviewable.
+  - Correlated measurement bias (same instrument for all groups) can hide real differences — instrument fairness is in scope for the risk review.
+  - Legal constraints on collecting/processing group attributes vary by jurisdiction — record the legal basis; interpretation requires qualified review.
+review_cadence: Quarterly and at every scope-expansion decision
+related_metrics:
+  - task-success-rate
+  - output-quality-rate
+  - customer-impact
+  - worker-experience-impact
+adverse_use_warnings:
+  - Never use group-level results to stereotype groups or justify excluding groups from service.
+  - Never report distributional analysis only when it is flattering; absence of analysis on a required axis is itself reportable.
+references:
+  - "mama-framework charter.md v0.1.0 principle 3; risk-value-interpretation.md §4"

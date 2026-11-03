@@ -1,0 +1,60 @@
+schema_version: "1.0.0"
+id: customer-impact
+title: Customer impact
+version: "0.1.0"
+status: draft
+category: human-customer-impact
+purpose: >
+  Describes measured change in customer outcomes — service experience, success,
+  and redress — for customers touched by the automated process.
+decision_use: >
+  Informs scope, escalation design, and rollout decisions: whether automation
+  is improving or degrading the customer's actual experience, not just the
+  operator's.
+formula: >
+  Change from baseline on stated components, reported side by side:
+  (a) service success from the customer's side (request achieved, first contact,
+  time to resolution); (b) complaint/dispute rate per 1,000 interactions;
+  (c) customer-reported experience (survey or rating instrument with version);
+  (d) redress performance — correction/compensation rate and time.
+unit: mixed (percent; rate per 1,000; scale points; days) — components reported separately
+denominator: >
+  (a) customer requests entering the process; (b) customer interactions;
+  (c) survey respondents with response rate; (d) affected customers with a
+  upheld complaint. Each component's denominator stated per component.
+inclusions:
+  - All customers of the process, including those who abandon (abandonment is an outcome)
+exclusions:
+  - Non-customer stakeholders (workers → worker-experience-impact)
+data_source: >
+  Service records, complaints/redress systems, customer surveys. Join keys
+  documented; identity handling per privacy policy (pseudonymized analytics).
+sampling: >
+  Census for (a),(b),(d); survey protocol for (c) with response-rate and
+  non-response-bias disclosure.
+time_window: Baseline before change; monthly/quarterly after
+owner_role: Customer/service owner (independent of the automation program)
+baseline_requirement: >
+  Pre-change baseline on identical component definitions; instrument versions
+  recorded with every wave. Complaint-taxonomy changes re-baseline (b).
+target_guidance: >
+  From service commitments (e.g., "no degradation in first-contact success;
+  complaint rate ≤ baseline +10% during ramp"). Distributional cuts required
+  for medium/high risk tiers (see distributional-effects).
+uncertainty: >
+  Survey and complaint data are sparse and biased toward the motivated;
+  report volumes and response rates, not just percentages. Attribution over
+  time is confounded — state it.
+limitations:
+  - Absent complaints ≠ absence of harm; customers may not know automation is involved — probe design matters.
+  - Customer populations differ across channels; do not compare across channels without normalization disclosure.
+review_cadence: Monthly (a,b,d) / quarterly (c)
+related_metrics:
+  - task-success-rate
+  - distributional-effects
+  - recovery-time
+adverse_use_warnings:
+  - Never present operational metrics (STP, latency) as customer experience.
+  - Never suppress redress metrics during rollout reporting.
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §4"

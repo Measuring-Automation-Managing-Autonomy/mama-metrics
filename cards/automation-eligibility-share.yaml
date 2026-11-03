@@ -1,0 +1,58 @@
+schema_version: "1.0.0"
+id: automation-eligibility-share
+title: Automation eligibility share
+version: "0.1.0"
+status: draft
+category: automation-coverage
+purpose: >
+  Describes what share of assessed work volume is eligible for automation under
+  explicitly documented criteria — the supply-side bound on every other
+  automation measure.
+decision_use: >
+  Informs scoping decisions: which processes to target for automation investment,
+  and how much of the process landscape remains outside any automation thesis.
+formula: >
+  (assessed work items classified eligible for automation) /
+  (all assessed work items in scope), expressed as percent.
+unit: percent
+denominator: >
+  All work items in the assessed scope for the window — items with a recorded
+  eligibility assessment, regardless of whether automation exists or is planned.
+inclusions:
+  - Work items with a completed eligibility assessment (documented criteria applied)
+  - Both currently-automated and not-yet-automated eligible items
+exclusions:
+  - Items without a completed assessment (reported separately as assessment coverage)
+data_source: >
+  Process/workflow assessment records; workflow mapping worksheet
+  (mama-framework/templates/workflow-decision-rights-mapping.md).
+sampling: >
+  Census where feasible; otherwise stratified sample by process area with
+  documented selection and size rationale.
+time_window: >
+  Rolling quarter, re-assessed on process change; snapshots aligned to reporting
+  windows and never silently re-based.
+owner_role: Process assessment owner (assessor role)
+baseline_requirement: >
+  Record the assessment criteria version, assessor, and scope map with the
+  baseline; re-baseline when criteria change (that is a MAJOR card change).
+target_guidance: >
+  Set targets only from the investment thesis (e.g., "≥60% of invoice-processing
+  volume assessed eligible by Q3"). No universal eligibility target exists.
+uncertainty: >
+  Eligibility judgments are assessor-dependent; record inter-assessor agreement
+  on a sample (dual-assessor per pilot protocol) and report as a range.
+limitations:
+  - Eligibility criteria embed assumptions (data availability, tolerance for error, regulation) that vary by context — comparisons across use cases require disclosure.
+  - High eligibility ≠ high value; eligibility says nothing about benefits or risk.
+  - Can be gamed by writing permissive criteria — criteria versions are part of the record.
+review_cadence: Quarterly, or on criteria/process change
+related_metrics:
+  - automation-coverage
+  - human-touch-ratio
+  - straight-through-completion-rate
+adverse_use_warnings:
+  - Never treat eligibility as a mandate or score of team quality.
+  - Never report eligibility share as automation achievement.
+references:
+  - "mama-framework charter.md v0.1.0 (automation measurement scope)"

@@ -1,0 +1,57 @@
+schema_version: "1.0.0"
+id: realized-vs-forecast-benefit
+title: Realized vs forecast benefit
+version: "0.1.0"
+status: draft
+category: cost-value
+purpose: >
+  Describes actual realized benefit against the recorded forecast, with the
+  attribution status stated — closing the loop the investment case opened.
+decision_use: >
+  Informs continue/adjust/expand/constrain/retire decisions and improves the
+  organization's next generation of forecasts (forecast calibration matters).
+formula: >
+  (realized benefit − forecast benefit) / (forecast benefit), expressed as
+  percent, for each benefit line in the baseline & value hypothesis record;
+  reported with: measurement mode, attribution method and its status
+  (established / not established), and the comparison design.
+unit: percent (per benefit line; also absolute currency)
+denominator: >
+  n/a — this is a difference measure; the reference is the recorded forecast
+  version from the baseline & value hypothesis template (never restated).
+inclusions:
+  - All benefit lines from the hypothesis (cost, time, quality, revenue, risk reduction) — including lines that did not materialize
+  - Adverse-effect lines where quantified (reported as negative benefit)
+exclusions:
+  - Benefits not in the recorded hypothesis (report separately as "unplanned observations"; never fold into the variance)
+data_source: >
+  Finance/operations records mapped to the hypothesis lines; the original
+  forecast document version.
+sampling: Census per line; state estimation methods for non-observable lines
+time_window: Aligned to the hypothesis's evaluation windows (e.g., +1, +2, +4 quarters)
+owner_role: Investment owner with the metric owner (separation of roles required)
+baseline_requirement: >
+  The forecast itself is the baseline; this card cannot be computed at all
+  without a recorded hypothesis — that is by design.
+target_guidance: >
+  The target is a variance band agreed in the hypothesis (e.g., "within ±20%
+  on cost lines by +2 quarters"). This card never retro-fits a forecast.
+uncertainty: >
+  Attribution is the whole game: state the design (controlled rollout,
+  matched comparison, before/after with confound handling) and its weaknesses.
+  Without an established attribution, report "observed change: X; attribution:
+  not established".
+limitations:
+  - A favorable variance with unestablished attribution is evidence of nothing — interpretation rules §3.
+  - Forecast optimism/pessimism is a known bias; track forecast calibration across use cases, not just this one.
+  - Benefit lines interact (cost down but quality down too); never sum lines into one "benefit score".
+review_cadence: At each hypothesis evaluation window
+related_metrics:
+  - cost-per-completed-outcome
+  - task-success-rate
+  - worker-experience-impact
+adverse_use_warnings:
+  - Never report "ROI" from this card alone; realized-vs-forecast is per-line and attribution-qualified.
+  - Never update the forecast after results are known (that destroys the measure).
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §2–3"

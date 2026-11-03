@@ -1,0 +1,53 @@
+schema_version: "1.0.0"
+id: escalation-rate
+title: Escalation rate
+version: "0.1.0"
+status: draft
+category: exceptions-reliability
+purpose: >
+  Describes the share of items or events requiring human authority beyond the
+  process's own handling — the measure of where decision rights are actually
+  being exercised.
+decision_use: >
+  Informs oversight design and autonomy reviews: where authority hits its
+  limit, and whether escalation paths keep pace with delegated work. Feeds
+  upstream `mama` review discussions as context — never as overrides.
+formula: >
+  (items/events escalated to a holder of greater authority) /
+  (all items/events in scope), expressed as percent. Report by escalation
+  level (team lead, specialist, management, external) and by trigger type.
+unit: percent (with level and trigger breakdown)
+denominator: >
+  All items/events in the process scope for the window; state whether
+  escalations from the human path are included (recommended: yes, tagged by path).
+inclusions:
+  - Escalations for decision authority (approvals, exceptions to policy, risk sign-off)
+  - Escalations for capability (the process cannot handle it)
+exclusions:
+  - Routine handoffs within the designed process without authority transfer
+data_source: Escalation/approval system records, ticket tags, authority logs
+sampling: Census; document tagging discipline (miscoded escalations are common)
+time_window: Rolling 30 days
+owner_role: Service/process owner with the risk/control owner
+baseline_requirement: >
+  Record pre-automation escalation profile for the same decision classes;
+  automation often shifts escalation mix (fewer volume escalations, harder ones).
+target_guidance: >
+  Derived from authority design (who is allowed to decide what) and review
+  capacity (e.g., "management escalations ≤2% with 1-business-day SLA").
+  A rising escalation rate on delegated decisions is a formal review trigger.
+uncertainty: >
+  Tagging inconsistency is the main error source; audit a sample monthly.
+  Escalations suppressed at source (people giving up) do not appear here —
+  pair with human-experience signals.
+limitations:
+  - Escalation rate says nothing about whether escalations were resolved well — pair with resolution quality/time.
+  - Cross-process comparisons require the same authority model; decision landscapes differ.
+review_cadence: Monthly
+related_metrics:
+  - exception-rate
+  - worker-experience-impact
+adverse_use_warnings:
+  - Never use falling escalations alone to justify widening delegated authority — expansion follows the upstream `mama` governance loop, not this metric.
+references:
+  - "mama-framework integration-contract.md v0.1.0 (reviews stay in `mama`)"

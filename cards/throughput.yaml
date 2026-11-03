@@ -1,0 +1,49 @@
+schema_version: "1.0.0"
+id: throughput
+title: Throughput
+version: "0.1.0"
+status: draft
+category: performance
+purpose: >
+  Describes completed outcomes per unit time at sustained load — the capacity
+  view that complements latency.
+decision_use: >
+  Informs capacity and scaling decisions: whether the automated path can absorb
+  projected volume, and at what saturation point quality or latency degrades.
+formula: >
+  (completed, accepted items) per time unit (hour/day/week), reported with the
+  load level (concurrent inputs, batch sizes) that produced it.
+unit: count per time unit
+denominator: >
+  Time units in the window where the process was scheduled-operable (align with
+  the availability card); report excluded windows.
+inclusions:
+  - Completed items meeting the task-success criterion for the window
+exclusions:
+  - Failed/abandoned items (report separately; do not let them inflate capacity)
+data_source: Workflow logs; scheduling calendar for operable time
+sampling: Census
+time_window: Rolling 7 days for operations; 30 days for reporting
+owner_role: Automation engineering lead
+baseline_requirement: >
+  Record pre-automation human throughput for the same outcome definition —
+  with the honesty note that human throughput at equal quality is the relevant
+  comparison, not peak human output at degraded quality.
+target_guidance: >
+  From demand forecasts (labeled as forecasts) plus headroom policy. State the
+  load conditions under which the target holds.
+uncertainty: >
+  Throughput varies with input mix; report per mix-class where mix shifts are
+  material. Peak-vs-sustained must be distinguished.
+limitations:
+  - High throughput of wrong output is negative value — never read alone (pair with quality, exceptions).
+  - Comparability requires the same outcome definition and operability rules.
+review_cadence: Monthly
+related_metrics:
+  - service-latency
+  - task-success-rate
+  - availability
+adverse_use_warnings:
+  - Never use raw throughput as a productivity ranking of teams (context rule, interpretation §7).
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §7"

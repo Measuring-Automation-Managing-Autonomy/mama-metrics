@@ -1,0 +1,50 @@
+schema_version: "1.0.0"
+id: recovery-time
+title: Recovery time
+version: "0.1.0"
+status: draft
+category: exceptions-reliability
+purpose: >
+  Describes how long restoration takes after a failure — the resilience
+  measure; fast recovery can be worth more than rare failure.
+decision_use: >
+  Informs resilience investment and rollback/stop-path design; feeds the
+  risk/impact review's "tested stop path" evidence.
+formula: >
+  Distribution of time from failure onset to restored operable service,
+  reported as median and p95 over the window's failure events; report the
+  event count. Split detect → decide → restore phases where data allows.
+unit: minutes/hours per event (distribution + count)
+denominator: >
+  All failure events requiring restoration in the window (from the availability
+  card's downtime events). A window with zero events is reported as such —
+  absence of events is not fast recovery.
+inclusions:
+  - Full and partial restorations (classified per the availability card's rule)
+  - Rollback/stop-path activations
+exclusions:
+  - Scheduled maintenance windows
+data_source: Incident records with timestamps; deployment/rollback logs
+sampling: Census of incidents; document detection-gap handling
+time_window: Rolling quarter (events can be rare); report cumulative with the history
+owner_role: Automation engineering lead with the risk/control owner
+baseline_requirement: >
+  Record the pre-automation recovery profile for equivalent failures in the
+  human process — including the "nobody noticed for a day" class of failure.
+target_guidance: >
+  From service commitments and risk tier (e.g., "p95 restore ≤ 30 min;
+  customer-facing failures paged within 5 min"). Targets pair with drills.
+uncertainty: >
+  Detection time depends on monitoring; onset often reconstructed after the
+  fact. Report the timestamping method. Small event counts → wide uncertainty.
+limitations:
+  - Recovery measured only on detected failures; silent-wrong-output failures may never appear — pair with quality and customer-impact.
+  - Fast mean recovery with a catastrophic tail is a risk posture, not a success — the p95/p99 tail is the story.
+review_cadence: Quarterly (or after every major incident)
+related_metrics:
+  - availability
+  - exception-rate
+adverse_use_warnings:
+  - Never present zero-incident windows as proof of resilience without drill evidence.
+references:
+  - "mama-framework templates/risk-impact-review.md v0.1.0 (stop/rollback tests)"

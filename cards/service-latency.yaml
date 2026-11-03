@@ -1,0 +1,49 @@
+schema_version: "1.0.0"
+id: service-latency
+title: Service latency
+version: "0.1.0"
+status: draft
+category: performance
+purpose: >
+  Describes how long the automated process takes per item, at percentiles that
+  expose the tail rather than flattering it with averages.
+decision_use: >
+  Informs service commitments, capacity planning, and whether latency-sensitive
+  use cases can extend automation scope.
+formula: >
+  Distribution of end-to-end completion time per item; report at minimum p50
+  and p95 (and p99 where tails matter), over the window.
+unit: "milliseconds/seconds/minutes/hours — state the clock: queue-to-completion vs processing-only"
+denominator: >
+  All completed items in the window; report the count alongside. Excluded items
+  (abandoned, dead-lettered) are reported separately with their counts.
+inclusions:
+  - Queue/wait time when the metric name says end-to-end; processing time only when named so
+exclusions:
+  - Items outside the process boundary (state the boundary)
+data_source: >
+  Timestamped workflow logs (entry → completion); clock definition versioned.
+sampling: Census; document clock-skew handling across systems
+time_window: Rolling 7 or 30 days
+owner_role: Automation engineering lead
+baseline_requirement: >
+  Record pre-automation latency from the same clock definition; a "faster"
+  queue-to-completion claim requires the same boundary, not a narrower one.
+target_guidance: >
+  Set from service commitments (e.g., "p95 ≤ 2 minutes end-to-end"). Percentile
+  targets beat average targets — averages hide the customers who suffer.
+uncertainty: >
+  Tail percentiles are sensitive to rare events; report item counts behind each
+  percentile. Mixed traffic (batches vs interactive) must be split or disclosed.
+limitations:
+  - Latency says nothing about correctness — pair with quality and exceptions.
+  - Optimizing latency can push load onto humans outside the boundary (hidden handoffs).
+review_cadence: Monthly
+related_metrics:
+  - throughput
+  - availability
+  - exception-rate
+adverse_use_warnings:
+  - Never report averages only; percentiles or nothing.
+references:
+  - "mama-framework architecture.md v0.1.0 (component 4: automation measurement)"

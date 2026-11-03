@@ -1,0 +1,50 @@
+schema_version: "1.0.0"
+id: rework-rate
+title: Rework rate
+version: "0.1.0"
+status: draft
+category: quality
+purpose: >
+  Describes the share of completed work that had to be corrected after first
+  completion — the hidden cost line that straight-through numbers can hide.
+decision_use: >
+  Informs fix-the-root-cause vs expand decisions: persistent rework says the
+  automated path is not ready for more scope, whatever its coverage looks like.
+formula: >
+  (items requiring one or more correction events after first completion) /
+  (all items completed in the window), expressed as percent. Report the
+  correction count distribution too (1×, 2×, 3+).
+unit: percent (plus correction-count distribution)
+denominator: >
+  All items recorded as completed in the window, by the same completion
+  definition used in task-success-rate.
+inclusions:
+  - Corrections by any actor (automated retry-on-defect, human fix, downstream bounce returned upstream)
+exclusions:
+  - First-pass exception handling that never recorded a (false) completion
+data_source: Workflow logs with correction/reopen events; QA fix records
+sampling: Census; document event-detection coverage
+time_window: Rolling 30 days
+owner_role: Quality owner
+baseline_requirement: >
+  Record the pre-automation rework profile; some rework is inherent to the
+  domain — the delta and its causes matter, not the raw level alone.
+target_guidance: >
+  Set from cost tolerance and the value hypothesis (rework consumed into the
+  cost-per-completed-outcome model). Declining rework at constant volume is a
+  common gate for scope expansion.
+uncertainty: >
+  Depends on correction-event capture; silent fixes (shadow spreadsheets,
+  off-system repairs) are the main blind spot — log-integrity review required.
+limitations:
+  - Distinguishing rework from legitimate iterative refinement needs a documented rule, versioned.
+  - Rework cost varies enormously per event; pair with effort or cost estimates when the delta is material.
+review_cadence: Monthly
+related_metrics:
+  - straight-through-completion-rate
+  - output-quality-rate
+  - cost-per-completed-outcome
+adverse_use_warnings:
+  - Never hide rework inside "successful completions" in portfolio reporting.
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §4"

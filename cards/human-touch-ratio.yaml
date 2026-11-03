@@ -1,0 +1,59 @@
+schema_version: "1.0.0"
+id: human-touch-ratio
+title: Human touch ratio
+version: "0.1.0"
+status: draft
+category: automation-coverage
+purpose: >
+  Describes the degree of human involvement remaining in automation-eligible
+  work: none, by exception, or continuous — so "automation" claims survive
+  contact with reality.
+decision_use: >
+  Informs workforce planning and oversight design: how much human labor and
+  judgment the automated path still requires, and where it concentrates.
+formula: >
+  Distribution of eligible work items by touch class —
+  no-touch (fully automated), exception-touch (human handles exceptions only),
+  continuous-touch (human involved in most items) — reported as the percent in
+  each class. Optionally a weighted index; if weighted, publish the weights.
+unit: percent distribution (or weighted index with published weights)
+denominator: >
+  All eligible work items processed in the window (same denominator rule as
+  automation-coverage).
+inclusions:
+  - Human handling time and events on the automated path
+  - Exception handling, review/approval steps, and manual corrections
+exclusions:
+  - Human work outside the eligible scope (report separately)
+data_source: >
+  Workflow logs with user-attributed actions; where unavailable, structured
+  operator journals with a documented protocol.
+sampling: >
+  Census from logs where attribution exists; otherwise sampled journals —
+  state sampling rate and protocol version.
+time_window: Rolling 30 days
+owner_role: Process assessment owner
+baseline_requirement: >
+  Record the pre-automation touch distribution; the interesting result is the
+  *shift* in the distribution, not the post-hoc level alone.
+target_guidance: >
+  Set from the operating design (e.g., "exception-touch ≤25% of items by Q4").
+  Note: reducing touch is not inherently good — some touch *is* the oversight design.
+uncertainty: >
+  Attribution errors (shared accounts, swivel-chair work) bias the distribution;
+  document identity/attribution quality. Weighted indices inherit weight
+  arbitrariness — always show the distribution too.
+limitations:
+  - Touch conflates time and judgment; a 2-minute review can matter more than an hour of routine handling.
+  - Does not measure whether remaining human work is good work or drudgery — pair with worker-experience-impact.
+  - Not comparable across use cases with different touch-class definitions.
+review_cadence: Quarterly
+related_metrics:
+  - automation-coverage
+  - worker-experience-impact
+  - exception-rate
+adverse_use_warnings:
+  - Never present "zero human touch" as an achievement where oversight is a control (interpretation rules §6).
+  - Never use touch reduction as a layoff proxy without the workforce impact review.
+references:
+  - "mama-framework roles.md v0.1.0 (human oversight owner)"

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/Measuring-Automation-Managing-Autonomy/mama-metrics/main/schema/metric-card.schema.json",
+  "title": "MAMA metric card",
+  "description": "Versioned definition of one MAMA (Measuring Automation & Measuring Autonomy) automation/value/impact metric. Cards define measurement; they never prescribe universal targets and never mix with `mama` autonomy outputs.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "title",
+    "version",
+    "status",
+    "category",
+    "purpose",
+    "decision_use",
+    "formula",
+    "unit",
+    "denominator",
+    "inclusions",
+    "exclusions",
+    "data_source",
+    "sampling",
+    "time_window",
+    "owner_role",
+    "baseline_requirement",
+    "target_guidance",
+    "uncertainty",
+    "limitations",
+    "review_cadence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0",
+      "description": "Version of this metric-card schema the card validates against."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Stable slug; survives renames; never reused by a different measure."
+    },
+    "title": { "type": "string", "minLength": 3 },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Card semver. Formula/denominator/inclusion changes require a MAJOR bump and a migration note."
+    },
+    "status": {
+      "enum": ["draft", "pilot", "reviewed", "stable", "deprecated", "archived"],
+      "description": "Artifact status label per org governance."
+    },
+    "category": {
+      "enum": [
+        "automation-coverage",
+        "performance",
+        "quality",
+        "exceptions-reliability",
+        "cost-value",
+        "human-customer-impact",
+        "distributional"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 20,
+      "description": "What this measure describes, in plain language."
+    },
+    "decision_use": {
+      "type": "string",
+      "minLength": 20,
+      "description": "The investment/operating decision this metric informs. Metrics without a decision use are not admitted."
+    },
+    "formula": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Explicit computation: numerator over denominator, or the counting rule. Must be reproducible from the stated source."
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unit of the result: percent, ratio, milliseconds, currency/time, index points, count."
+    },
+    "denominator": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Exactly what the denominator counts. The most common source of incomparability; must be explicit."
+    },
+    "inclusions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "What counts in numerator and denominator."
+    },
+    "exclusions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What is excluded and why. Empty array is allowed but must be a conscious choice."
+    },
+    "data_source": {
+      "type": "string",
+      "minLength": 10,
+      "description": "System(s) of record and the extraction approach. Local-first; no centralized telemetry required."
+    },
+    "sampling": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Census or sampling design; if sampled, method and size rationale."
+    },
+    "time_window": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Default reporting window and alignment rules (calendar vs rolling)."
+    },
+    "owner_role": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Role accountable for this card's definition and data quality. Must not be the benefit claimant (roles.md separation)."
+    },
+    "baseline_requirement": {
+      "type": "string",
+      "minLength": 20,
+      "description": "What a valid baseline for this metric requires (window, comparability, recording)."
+    },
+    "target_guidance": {
+      "type": "string",
+      "minLength": 20,
+      "description": "How a use case sets its own target. MUST NOT state a universal target."
+    },
+    "uncertainty": {
+      "type": "string",
+      "minLength": 20,
+      "description": "Sources of error/variation and how to express them (CI, ranges, counts)."
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Known failure modes of interpretation — at minimum the gaming/misreading risks."
+    },
+    "review_cadence": {
+      "type": "string",
+      "minLength": 3,
+      "description": "How often the card's definition and data quality are re-checked."
+    },
+    "related_metrics": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Card IDs commonly reported alongside this one (balance set)."
+    },
+    "adverse_use_warnings": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What this metric must NOT be used for (e.g. ranking, proxies, quotas)."
+    },
+    "references": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Framework docs, upstream sources, or prior art with versions."
+    }
+  },
+  "additionalProperties": false
+}

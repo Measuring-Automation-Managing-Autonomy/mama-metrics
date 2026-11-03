@@ -1,0 +1,53 @@
+schema_version: "1.0.0"
+id: task-success-rate
+title: Task success rate
+version: "0.1.0"
+status: draft
+category: performance
+purpose: >
+  Describes the share of items that achieve the defined success criterion —
+  not just completion, but the outcome the process exists to produce.
+decision_use: >
+  Informs whether the automated process is fit for its purpose at current
+  scope, and whether scope changes are safe.
+formula: >
+  (items meeting the documented success criterion) /
+  (all items entering the process), expressed as percent.
+unit: percent
+denominator: >
+  All items entering the process in the window, including abandoned and
+  rejected items. The success criterion (correct outcome, within tolerance,
+  accepted by the receiving party) is versioned with the card instance.
+inclusions:
+  - Items successful on first attempt and after retry (report separately)
+exclusions: []
+data_source: >
+  Process outcomes joined to the receiving system's acceptance record (customer
+  confirmation, downstream system acceptance, QA sample).
+sampling: >
+  Census where outcome is machine-observable; QA sampling protocol (with size
+  rationale) where acceptance is human-judged.
+time_window: Rolling 30 days
+owner_role: Service/process owner
+baseline_requirement: >
+  Record the pre-automation success rate from the same criterion version;
+  criterion changes re-baseline the series.
+target_guidance: >
+  Derived from the value hypothesis and the receiving party's tolerance.
+  Where success is human-judged, targets must state the sampling design.
+uncertainty: >
+  Human-judged success carries rater variance; dual-assess a sample and report
+  agreement. Machine-observable success can miss latent defects — pair with
+  output-quality-rate and customer-impact.
+limitations:
+  - The success criterion may omit effects on people it never asks about (see distributional-effects).
+  - Retry loops can make "eventually successful" mask first-attempt quality.
+review_cadence: Monthly
+related_metrics:
+  - straight-through-completion-rate
+  - output-quality-rate
+  - customer-impact
+adverse_use_warnings:
+  - Never redefine success criteria mid-window to keep a trend line green.
+references:
+  - "mama-framework templates/baseline-value-hypothesis.md v0.1.0"

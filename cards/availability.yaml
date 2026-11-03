@@ -1,0 +1,52 @@
+schema_version: "1.0.0"
+id: availability
+title: Availability
+version: "0.1.0"
+status: draft
+category: exceptions-reliability
+purpose: >
+  Describes the share of scheduled time the automated capability is operable —
+  the precondition for every other automated-path metric.
+decision_use: >
+  Informs service commitments and resilience investment; also the honesty check
+  on coverage and throughput (metrics computed only during outages lie).
+formula: >
+  (scheduled operable minutes − downtime minutes) /
+  (scheduled operable minutes), expressed as percent, where "operable" means
+  the automated path could accept and process items within its normal latency.
+unit: percent
+denominator: >
+  Scheduled operable minutes in the window (the service calendar — e.g., 24×7
+  or business hours). Degraded-but-operating states are classified by a
+  documented rule (full, partial, down).
+inclusions:
+  - Downtime from any cause (system failure, dependency failure, deployment error, external outage)
+  - Partial outages weighted by the documented rule (e.g., capacity-weighted)
+exclusions:
+  - Scheduled maintenance (declared in the calendar, reported separately)
+data_source: Monitoring/observability records, incident records; reconciled with the service calendar.
+sampling: Census from monitors; monitor coverage is part of data quality
+time_window: Rolling 30 days
+owner_role: Automation engineering lead
+baseline_requirement: >
+  Record the pre-availability reference for the equivalent human-operated
+  process (office hours, human absence) — human processes have availability
+  profiles too; the comparison should be honest about both.
+target_guidance: >
+  From service commitments (e.g., "99.5% monthly for customer-facing path").
+  State the measurement system and its known blind spots with the target.
+uncertainty: >
+  Monitor placement defines what downtime is even visible; report probe
+  coverage. Partial-degradation classification is judgment-laden — version the rule.
+limitations:
+  - Availability ≠ correctness — an available path producing wrong output is worse than a blocked one; read with quality and exceptions.
+  - Availability achieved by rejecting inputs is gaming; pair with throughput and input-rejection reporting.
+review_cadence: Monthly
+related_metrics:
+  - recovery-time
+  - throughput
+  - exception-rate
+adverse_use_warnings:
+  - Never report availability without the measurement system's coverage statement.
+references:
+  - "mama-framework architecture.md v0.1.0 (component 4)"

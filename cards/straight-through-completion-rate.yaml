@@ -1,0 +1,56 @@
+schema_version: "1.0.0"
+id: straight-through-completion-rate
+title: Straight-through completion rate
+version: "0.1.0"
+status: draft
+category: performance
+purpose: >
+  Describes the share of items that complete on the automated path with no
+  manual intervention and no rework — the classic STP measure, stated strictly.
+decision_use: >
+  Informs operating-design decisions: where exceptions concentrate, whether the
+  automated path is trustworthy enough to carry volume without a human safety net.
+formula: >
+  (items completed on the automated path with zero manual interventions and zero
+  rework events) / (all items entering the process), expressed as percent.
+unit: percent
+denominator: >
+  All items entering the process in the window — including items that later
+  failed, were rejected, or needed correction. A denominator of "items that
+  finished" hides the failures; do not use it.
+inclusions:
+  - Manual interventions of any kind (touch, correction, approval) count against STP
+  - Rework events after first "completion" count against STP
+exclusions:
+  - Items not intended for the automated path (see eligibility criteria version)
+data_source: >
+  End-to-end process logs joining entry, path events, and completion; requires
+  reliable item identity across systems.
+sampling: Census; document join-completeness between systems
+time_window: Rolling 30 days
+owner_role: Service/process owner
+baseline_requirement: >
+  Record the manual (pre-automation) equivalent — for most processes this is
+  not 100%, since humans also make errors; the honest baseline makes the delta real.
+target_guidance: >
+  Targets come from the value hypothesis (e.g., "STP ≥70% at contract go-live").
+  Strictness matters: a 95% STP with a lax intervention definition may be worse
+  than an 80% STP measured honestly — the intervention definition is versioned.
+uncertainty: >
+  Sensitive to intervention detection (silent fixes, shadow tooling); report
+  detection method and known blind spots with the number.
+limitations:
+  - Interventions vary in cost; STP treats a 2-second confirmation like a 2-hour rebuild — pair with rework-rate and latency.
+  - Perfectly suppressable interventions (stop logging) inflate STP; log-integrity checks belong in data-quality notes.
+  - Only comparable across use cases with the same intervention definition version.
+review_cadence: Monthly
+related_metrics:
+  - automation-coverage
+  - rework-rate
+  - exception-rate
+  - task-success-rate
+adverse_use_warnings:
+  - Never present STP as quality — an item can be straight-through and wrong (see output-quality-rate).
+  - Never use STP as the sole gate for expanding autonomy grants; that is upstream `mama`'s review process with its own evidence rules.
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §3–4"

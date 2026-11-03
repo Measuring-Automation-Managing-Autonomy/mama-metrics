@@ -1,0 +1,52 @@
+schema_version: "1.0.0"
+id: exception-rate
+title: Exception rate
+version: "0.1.0"
+status: draft
+category: exceptions-reliability
+purpose: >
+  Describes the share of items leaving the automated path for human handling —
+  the boundary where delegated work returns to people.
+decision_use: >
+  Informs operating design and workload planning: exception volume is the
+  human staffing need, and its causes drive the next automation increment.
+formula: >
+  (items that left the automated path for any human handling) /
+  (all items entering the automated path), expressed as percent. Report a
+  breakdown by exception class (input data, rule gap, system failure, review
+  trigger, customer action).
+unit: percent (with class breakdown)
+denominator: >
+  All items entering the automated path in the window — including items that
+  ultimately succeeded; an item the automated path nearly finished but a human
+  touched still counts as an exception.
+inclusions:
+  - All exit-to-human events, regardless of eventual outcome
+  - Multiple exceptions on one item — count the item once, report event counts separately
+exclusions:
+  - Interactions that are part of the designed process (documented approval steps are exceptions only if ad hoc)
+data_source: Workflow logs of path transitions; exception-handling system records
+sampling: Census; document transition-event detection coverage
+time_window: Rolling 30 days
+owner_role: Service/process owner
+baseline_requirement: >
+  Record the pre-automation exception profile (all work was "exceptions" when
+  humans did everything) — what matters is the *residual* profile and its causes.
+target_guidance: >
+  From operating design capacity (e.g., "exception queue ≤ N items/day at
+  staffing M"). Exception-rate targets are staffing commitments, not virtues.
+uncertainty: >
+  Path-transition detection gaps undercount; report detection method. Exception
+  class mix is where the value is — percentages alone hide it.
+limitations:
+  - A low exception rate at high quality is good; a low rate achieved by blocking inputs is not — read with task-success and input volumes.
+  - Exception handling quality is itself work worth measuring (human re-fixes, repeat exceptions).
+review_cadence: Monthly
+related_metrics:
+  - escalation-rate
+  - automation-coverage
+  - human-touch-ratio
+adverse_use_warnings:
+  - Never treat exceptions as failure of the humans handling them; the metric describes the boundary, not the people.
+references:
+  - "mama-framework templates/workflow-decision-rights-mapping.md v0.1.0 (exception paths)"

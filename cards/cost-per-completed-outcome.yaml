@@ -1,0 +1,59 @@
+schema_version: "1.0.0"
+id: cost-per-completed-outcome
+title: Cost per completed outcome
+version: "0.1.0"
+status: draft
+category: cost-value
+purpose: >
+  Describes the fully loaded cost of one completed outcome — the unit economics
+  that percentage metrics cannot express.
+decision_use: >
+  Informs investment continuation and pricing decisions; the denominator
+  discipline (completed, accepted outcomes only) makes it comparable across
+  automation levels.
+formula: >
+  (fully loaded cost attributable to the process in the window) /
+  (completed, accepted outcomes in the window), expressed as currency per
+  outcome. Fully loaded = run cost + allocated platform/licensing + exception
+  handling labor + rework + QA + amortized build cost per the documented model.
+unit: currency per completed outcome
+denominator: >
+  Completed, accepted outcomes in the window (same completion definition as
+  task-success-rate). Outcomes later rejected/reworked are counted in the
+  numerator (their cost) and, where the correction produced a completed
+  outcome, also in the denominator once.
+inclusions:
+  - Human labor on the process (exception handling, oversight, QA) — automation does not make human cost vanish
+  - Platform, licensing, data, and incident costs
+  - Amortized build/change cost per the documented model (state the amortization period)
+exclusions:
+  - Costs of other processes sharing the platform without an allocation rule
+data_source: Finance records, platform billing, time allocations; allocation rules documented and versioned.
+sampling: Census from ledgers; allocation model reviewed by finance partner
+time_window: Monthly or quarterly; align with finance close
+owner_role: Finance partner with the use-case owner (metric owner independent of the benefit claimant)
+baseline_requirement: >
+  Record the pre-automation unit cost with the same loading model; state what
+  the old model omitted — honest baselines often need a parallel-build period.
+target_guidance: >
+  From the investment case (e.g., "≤ $4.20 per outcome at steady state").
+  Show the trajectory, not just the endpoint; early periods are dominated by
+  amortization.
+uncertainty: >
+  Allocation rules are the main uncertainty; publish the model version and run
+  a sensitivity on the largest allocated component. Small denominators make
+  unit costs volatile — report volumes.
+limitations:
+  - Cost per outcome ignores value differences between outcomes; do not rank unlike outcomes.
+  - Loaded-cost models can hide real costs (shared platform, human attention) or double-count; the model version is part of the record.
+  - Not comparable across currencies/organizations without disclosure.
+review_cadence: Quarterly (with finance close)
+related_metrics:
+  - realized-vs-forecast-benefit
+  - rework-rate
+  - throughput
+adverse_use_warnings:
+  - Never present unit cost without the loading model — headline numbers without allocations mislead.
+  - Never compute "savings" purely from avoided headcount without the workforce impact review.
+references:
+  - "mama-framework templates/baseline-value-hypothesis.md v0.1.0"

@@ -1,0 +1,65 @@
+schema_version: "1.0.0"
+id: worker-experience-impact
+title: Worker experience impact
+version: "0.1.0"
+status: draft
+category: human-customer-impact
+purpose: >
+  Describes measured change in workers' experience of the work: workload
+  composition, oversight burden, skill use, and self-reported experience —
+  the effects automation has on the people operating alongside it.
+decision_use: >
+  Informs operating-design and workforce decisions: whether the automated
+  path leaves meaningful, sustainable work; where oversight burden concentrates;
+  what training/redeployment the design owes people.
+formula: >
+  Change from baseline on three components, reported side by side (never
+  summed into one index unless a locally published, validated weighting exists):
+  (a) workload profile — time distribution across task classes from workflow
+  data; (b) oversight burden — escalations and reviews per worker-day;
+  (c) self-reported experience — validated survey instrument, mean and
+  distribution, response rate disclosed.
+unit: mixed (percent of time; count per worker-day; survey scale points) — components reported separately
+denominator: >
+  (a) all working time in the process; (b) worker-days in role; (c) survey
+  respondents with response rate reported — non-response bias assessed where
+  response rate is low.
+inclusions:
+  - All workers materially affected by the change, including those whose work shifted to exception handling
+exclusions:
+  - Workers outside the process (their effects belong in separate records; do not lose them)
+data_source: >
+  Workflow logs (component a), oversight records (b), survey instrument with
+  consent protocol (c). Local-first; individual responses pseudonymized.
+sampling: >
+  (a),(b) census; (c) full-population survey with response-rate reporting and
+  anonymity protections; document the instrument and its validation status.
+time_window: Baseline before change; quarterly after
+owner_role: Workforce/people partner (independent of the automation program's delivery owner)
+baseline_requirement: >
+  Baseline is mandatory and must precede deployment — retrospective "impacts"
+  without a baseline are not acceptable for this card. Instrument version
+  recorded with every wave.
+target_guidance: >
+  Set from the operating design's commitments (e.g., "no increase in
+  per-worker escalation burden at steady state"). Survey targets are
+  distributional, not just means (e.g., "bottom-quartile experience score
+  improves or holds").
+uncertainty: >
+  Survey results carry response and social-desirability bias; response rate
+  and anonymity design are part of the record. Workload attribution from logs
+  misses informal work.
+limitations:
+  - Self-reported data is sensitive to fear of consequences; anonymity protocol quality bounds validity.
+  - Effect attribution over time is confounded by everything else changing at work — state attribution limits honestly.
+  - Small worker populations make waves re-identifiable; aggregation thresholds required.
+review_cadence: Quarterly
+related_metrics:
+  - human-touch-ratio
+  - escalation-rate
+  - distributional-effects
+adverse_use_warnings:
+  - Never use this card to label workers as resistant to change.
+  - Never aggregate it into an automation success index (ADR-003); adverse findings are reported as findings.
+references:
+  - "mama-framework roles.md v0.1.0 (affected stakeholder representative)"

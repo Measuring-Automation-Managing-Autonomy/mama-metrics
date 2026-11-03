@@ -1,0 +1,56 @@
+schema_version: "1.0.0"
+id: output-quality-rate
+title: Output quality rate
+version: "0.1.0"
+status: draft
+category: quality
+purpose: >
+  Describes the share of outputs meeting quality criteria without correction —
+  the measure that keeps automation coverage honest.
+decision_use: >
+  Informs scope and gate decisions: which item classes the automated path may
+  handle unattended, and where review layers must stay.
+formula: >
+  (outputs meeting the documented quality criteria without correction) /
+  (all outputs produced by the automated path), expressed as percent.
+unit: percent
+denominator: >
+  All outputs produced by the automated path in the window, including those
+  later caught by QA, customers, or downstream systems. Defects discovered
+  late count in the numerator's complement — late discovery is worse, and
+  reporting discovery stage is required.
+inclusions:
+  - Defects caught at any stage (QA, downstream, customer reports), tagged by discovery stage
+exclusions:
+  - Inputs that were invalid on arrival (count as exceptions, not defects)
+data_source: >
+  QA records, downstream acceptance systems, customer complaint feeds joined
+  to output identity.
+sampling: >
+  Census where machine-checkable; layered sampling (automated checks on all,
+  human QA on a documented sample) otherwise — state the protocol version.
+time_window: Rolling 30 days
+owner_role: Quality owner (independent of the benefit claimant)
+baseline_requirement: >
+  Record the pre-automation defect profile by discovery stage; automation
+  typically shifts defects later and in bulk — the baseline must be comparable.
+target_guidance: >
+  From the receiving party's tolerance and risk tier (e.g., "≤0.5% customer-
+  discovered defects"). Higher-risk item classes need their own targets.
+uncertainty: >
+  QA sampling misses latent defects; report sample sizes and detection-stage
+  distribution. Quality measured only at the boundary misses degraded-but-
+  accepted output — describe criteria versions explicitly.
+limitations:
+  - Quality criteria embed context (regulatory, contractual) that varies; cross-use comparisons need criteria disclosure.
+  - Automated QA can share failure modes with automated production — correlated blindness is a known trap.
+review_cadence: Monthly
+related_metrics:
+  - task-success-rate
+  - rework-rate
+  - distributional-effects
+adverse_use_warnings:
+  - Never aggregate quality into a composite with coverage or autonomy outputs (ADR-003).
+  - Never relax quality criteria to make a rollout metric look good mid-window.
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §4 (balanced reporting)"

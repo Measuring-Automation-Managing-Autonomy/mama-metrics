@@ -1,0 +1,56 @@
+schema_version: "1.0.0"
+id: automation-coverage
+title: Automation coverage
+version: "0.1.0"
+status: draft
+category: automation-coverage
+purpose: >
+  Describes how much of the eligible work is actually processed by the automated
+  path — what changed in the work, independent of whether it improved.
+decision_use: >
+  Informs rollout pacing and investment follow-through: is the automated
+  capability actually carrying the eligible volume it was built for?
+formula: >
+  (work items processed by the automated path) /
+  (work items classified eligible for automation), expressed as percent.
+unit: percent
+denominator: >
+  Eligible work items in scope for the window (per automation-eligibility-share's
+  criteria and version). Coverage above 100% indicates an eligibility problem —
+  investigate, do not clip.
+inclusions:
+  - Items fully processed by the automated path
+  - Items partially automated, counted by the documented counting rule (per-item or per-step weighted; pick one and state it)
+exclusions:
+  - Ineligible items (they belong in the eligibility assessment, not here)
+  - Test/synthetic traffic unless explicitly included
+data_source: >
+  Workflow/system logs, orchestrator traces, or process-mining exports; must
+  distinguish automated from manual path per item.
+sampling: Census from logs; document log coverage/loss
+time_window: Rolling 30 days by default; align to baseline window
+owner_role: Automation engineering lead
+baseline_requirement: >
+  Record pre-deployment coverage (usually ~0) with the eligibility criteria
+  version; coverage trends are meaningless without the criteria version.
+target_guidance: >
+  Targets follow the rollout plan (e.g., "≥80% of eligible volume by end of Q2").
+  Do not use another team's coverage as a benchmark without scope disclosure.
+uncertainty: >
+  Log completeness drives error bars; record extraction method and known gaps.
+  Report absolute volumes alongside percentages.
+limitations:
+  - Coverage is not success — automated-but-wrong work inflates coverage while destroying value.
+  - Path classification can be ambiguous in human-in-the-loop designs; the counting rule must be versioned.
+  - Cross-use-case comparisons require identical eligibility criteria versions and disclosure.
+review_cadence: Monthly definition check; data-quality review quarterly
+related_metrics:
+  - automation-eligibility-share
+  - human-touch-ratio
+  - exception-rate
+  - output-quality-rate
+adverse_use_warnings:
+  - Never use coverage alone as a success proxy or ranking (interpretation rules §5).
+  - Never reward coverage increases that coincide with quality or distributional regressions.
+references:
+  - "mama-framework risk-value-interpretation.md v0.1.0 §5"
