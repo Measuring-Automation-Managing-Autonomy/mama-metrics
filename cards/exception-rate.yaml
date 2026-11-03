@@ -50,3 +50,4 @@ adverse_use_warnings:
   - Never treat exceptions as failure of the humans handling them; the metric describes the boundary, not the people.
 references:
   - "mama-framework templates/workflow-decision-rights-mapping.md v0.1.0 (exception paths)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-exception-handling-rate — Exception Handling Rate (managed crosswalk: external/dea-mapping.yaml)"

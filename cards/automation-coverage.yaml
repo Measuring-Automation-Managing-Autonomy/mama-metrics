@@ -54,3 +54,4 @@ adverse_use_warnings:
   - Never reward coverage increases that coincide with quality or distributional regressions.
 references:
   - "mama-framework risk-value-interpretation.md v0.1.0 §5"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-automation-potential-realized-rate — Automation Potential Realized Rate (managed crosswalk: external/dea-mapping.yaml)"

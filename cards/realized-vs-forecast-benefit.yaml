@@ -55,3 +55,4 @@ adverse_use_warnings:
   - Never update the forecast after results are known (that destroys the measure).
 references:
   - "mama-framework risk-value-interpretation.md v0.1.0 §2–3"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-benefits-realization-ratio — Benefits Realization Ratio (managed crosswalk: external/dea-mapping.yaml)"

@@ -1,0 +1,212 @@
+# Managed crosswalk: mama-metrics cards <-> OpenDEAM dea-catalog-metrics records
+# Policy: external/dea-catalog-metrics.md (single source of truth for these references).
+# Validation: tools/validate_external_refs.py --catalog <clone of dea-catalog-metrics at pinned_commit>
+schema_version: "1.0.0"
+
+reference:
+  catalog_repo: technehub-labs/dea-catalog-metrics
+  catalog_entity: dea:PerformanceMetric
+  metamodel: technehub-labs/dea-metamodel v0.2.1
+  catalog_license: Apache-2.0
+  pinned_commit: c2a2951a8a4f437817e293cd12593b4e70176f4d
+  pinned_at: "2026-11-04"
+  upstream_change_request: CR-MET-021
+
+# relationship is stated from the MAMA card's perspective:
+#   aligns_with | narrows | broadens | proposes_upstream  (definitions in the policy doc)
+mappings:
+  - mama_card: automation-coverage
+    dea_record: dea:metric-automation-potential-realized-rate
+    dea_name: Automation Potential Realized Rate
+    dea_lifecycle: candidate
+    relationship: aligns_with
+    meaning_note: >-
+      Both express automated share of automatable work. The MAMA card requires
+      the eligibility criteria version to be recorded with every value and
+      forbids coverage-as-success readings; the DEA record states the general
+      construct. Values are comparable only when the card's denominator rules
+      are applied.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: straight-through-completion-rate
+    dea_record: dea:metric-straight-through-processing-rate-automation
+    dea_name: Straight-Through Processing Rate (Automation)
+    dea_lifecycle: candidate
+    relationship: aligns_with
+    meaning_note: >-
+      Same construct in the same (automation) context. The MAMA card is
+      stricter: a versioned intervention definition, failures counted in the
+      denominator, and mandatory pairing with rework and quality cards.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: task-success-rate
+    dea_record: dea:metric-bot-success-rate
+    dea_name: Bot Success Rate
+    dea_lifecycle: candidate
+    relationship: broadens
+    meaning_note: >-
+      The DEA record covers bot/conversational-automation success; the MAMA
+      card covers success of any automated task against a versioned success
+      criterion, including human-judged outcomes with sampling design.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: output-quality-rate
+    dea_record: dea:metric-first-pass-yield
+    dea_name: First Pass Yield
+    dea_lifecycle: candidate
+    relationship: aligns_with
+    meaning_note: >-
+      Classic first-pass quality construct. The MAMA card adds discovery-stage
+      tagging (QA/downstream/customer), correlated-blindness warnings for
+      automated QA, and the prohibition on quality/coverage composites.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: service-latency
+    dea_record: dea:metric-application-response-time
+    dea_name: Application Response Time
+    dea_lifecycle: candidate
+    relationship: broadens
+    meaning_note: >-
+      The DEA record measures application response time; the MAMA card covers
+      end-to-end process latency for any automated path with mandatory
+      percentile reporting and clock-definition versioning.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: exception-rate
+    dea_record: dea:metric-exception-handling-rate
+    dea_name: Exception Handling Rate
+    dea_lifecycle: candidate
+    relationship: aligns_with
+    meaning_note: >-
+      Same construct. The MAMA card requires the exception-class breakdown
+      (input data / rule gap / system failure / review trigger), reads the
+      rate as a staffing commitment rather than a virtue, and forbids
+      attributing exceptions to the humans handling them.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: escalation-rate
+    dea_record: dea:metric-escalation-rate-llm-to-human
+    dea_name: Escalation Rate - LLM to Human
+    dea_lifecycle: candidate
+    relationship: broadens
+    meaning_note: >-
+      The DEA record is specific to LLM-to-human escalation; the MAMA card
+      covers escalation to any higher decision authority across the process,
+      and explicitly feeds (never overrides) upstream `mama` autonomy reviews.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: availability
+    dea_record: dea:metric-achieved-availability
+    dea_name: Achieved Availability
+    dea_lifecycle: candidate
+    relationship: aligns_with
+    meaning_note: >-
+      Same availability construct. The MAMA card adds the operable-minutes
+      calendar rule, partial-outage weighting disclosure, the input-rejection
+      gaming warning, and the requirement to state monitor coverage.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: recovery-time
+    dea_record: dea:metric-mean-time-to-recovery
+    dea_name: Mean Time to Recovery
+    dea_lifecycle: admitted
+    relationship: narrows
+    meaning_note: >-
+      The admitted DEA record defines MTTR generally; the MAMA card narrows it
+      to failure events of the automated path with a detect-decide-restore
+      phase split, drill-based resilience evidence, and the zero-incident
+      caveat. Restorations of non-automated failures are out of the card's scope.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: customer-impact
+    dea_record: dea:metric-customer-satisfaction-score
+    dea_name: Customer Satisfaction Score
+    dea_lifecycle: candidate
+    relationship: broadens
+    meaning_note: >-
+      The DEA record is the CSAT construct; the MAMA card is a four-component
+      view (service success, complaint rate, survey experience, redress
+      performance) with response-rate disclosure and mandatory distributional
+      cuts for higher-risk tiers.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: realized-vs-forecast-benefit
+    dea_record: dea:metric-benefits-realization-ratio
+    dea_name: Benefits Realization Ratio
+    dea_lifecycle: candidate
+    relationship: narrows
+    meaning_note: >-
+      The DEA record expresses realized-vs-planned benefit generally; the MAMA
+      card requires the recorded forecast document version, per-benefit-line
+      reporting, an attribution status (established / partially established /
+      not established), and forbids post-hoc forecast edits.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  - mama_card: human-touch-ratio
+    dea_record: dea:metric-human-in-the-loop-intervention-rate
+    dea_name: Human-in-the-Loop Intervention Rate
+    dea_lifecycle: candidate
+    relationship: broadens
+    meaning_note: >-
+      The DEA record counts human interventions in the loop; the MAMA card is
+      the full touch distribution (no-touch / exception-touch / continuous-touch)
+      with workforce-impact pairing and the oversight-as-control caveat.
+    upstream_reference_added: true
+    managed_since: "2026-11-04"
+
+  # --- Proposed upstream: no adequate DEA record exists yet (CR-MET-021) ----
+  - mama_card: automation-eligibility-share
+    dea_record: null
+    dea_name: null
+    dea_lifecycle: null
+    relationship: proposes_upstream
+    cr_ref: CR-MET-021
+    meaning_note: >-
+      Eligibility assessment share is a precondition construct; the closest DEA
+      records (Automation Ratio, Automation Potential Realized Rate) presuppose
+      an eligibility notion without defining its assessment. Proposed as a
+      candidate record.
+    upstream_reference_added: false
+    managed_since: "2026-11-04"
+
+  - mama_card: worker-experience-impact
+    dea_record: null
+    dea_name: null
+    dea_lifecycle: null
+    relationship: proposes_upstream
+    cr_ref: CR-MET-021
+    meaning_note: >-
+      Closest DEA record is Employee Experience Score by Journey (narrower).
+      The MAMA card is a three-component construct (workload profile, oversight
+      burden, validated survey) with baseline-before-change and
+      small-population aggregation rules. Proposed as a candidate record.
+    upstream_reference_added: false
+    managed_since: "2026-11-04"
+
+  - mama_card: distributional-effects
+    dea_record: null
+    dea_name: null
+    dea_lifecycle: null
+    relationship: proposes_upstream
+    cr_ref: CR-MET-021
+    meaning_note: >-
+      Between-group outcome/failure distribution with small-cell suppression
+      and attribute-provenance rules; no DEA equivalent was found in the
+      catalog. Proposed as a candidate record.
+    upstream_reference_added: false
+    managed_since: "2026-11-04"
+
+revision_history:
+  - date: "2026-11-04"
+    change: Initial crosswalk (13 rows) pinned to catalog commit c2a2951a8a4f437817e293cd12593b4e70176f4d; upstream back-references seeded via CR-MET-021.

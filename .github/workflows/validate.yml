@@ -19,3 +19,24 @@ jobs:
         run: python -m pip install --disable-pip-version-check pyyaml jsonschema
       - name: Validate metric cards
         run: python tools/validate_cards.py
+
+  dea-crosswalk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validator dependencies
+        run: python -m pip install --disable-pip-version-check pyyaml
+      - name: Read pinned catalog commit
+        id: pin
+        run: |
+          SHA=$(python -c "import yaml; print(yaml.safe_load(open('external/dea-mapping.yaml'))['reference']['pinned_commit'])")
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+      - name: Clone OpenDEAM catalog at pinned commit
+        run: |
+          git clone --quiet --filter=blob:none --no-checkout https://github.com/technehub-labs/dea-catalog-metrics /tmp/dea-catalog
+          git -C /tmp/dea-catalog checkout --quiet ${{ steps.pin.outputs.sha }}
+      - name: Validate crosswalk against pinned catalog
+        run: python tools/validate_external_refs.py --catalog /tmp/dea-catalog

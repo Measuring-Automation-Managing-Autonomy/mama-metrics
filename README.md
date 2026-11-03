@@ -69,6 +69,14 @@ This repository defines **MAMA automation measurement** — how much eligible wo
 - Schema: semver; additive optional properties = MINOR; new required fields = MAJOR.
 - No card ever prescribes a universal target. No card mixes automation measures with `mama` autonomy outputs.
 
+## External references (managed crosswalks)
+
+This library maintains a **managed cross-reference relationship** with the [OpenDEAM Performance Metrics Catalog](https://github.com/technehub-labs/dea-catalog-metrics) — 12 of our cards are mapped to `dea:PerformanceMetric` records (typed `aligns_with`/`narrows`/`broadens` with mandatory meaning notes), and 3 cards are proposed upstream as candidate records.
+
+- Policy & rules: [`external/dea-catalog-metrics.md`](external/dea-catalog-metrics.md) — single source of truth for all cross-references, version-pinned to a catalog commit, CI-validated with drift detection.
+- Mapping: [`external/dea-mapping.yaml`](external/dea-mapping.yaml).
+- Validate locally: `python tools/validate_external_refs.py --catalog <clone of dea-catalog-metrics>`.
+
 ## License
 
 [CC-BY-4.0](LICENSE) for cards, schema, and docs; Apache-2.0 for `tools/` code. See the [license policy](https://github.com/Measuring-Automation-Managing-Autonomy/.github/blob/main/LICENSE-POLICY.md).

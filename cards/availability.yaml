@@ -50,3 +50,4 @@ adverse_use_warnings:
   - Never report availability without the measurement system's coverage statement.
 references:
   - "mama-framework architecture.md v0.1.0 (component 4)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-achieved-availability — Achieved Availability (managed crosswalk: external/dea-mapping.yaml)"

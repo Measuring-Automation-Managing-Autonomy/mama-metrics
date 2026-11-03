@@ -57,3 +57,4 @@ adverse_use_warnings:
   - Never use touch reduction as a layoff proxy without the workforce impact review.
 references:
   - "mama-framework roles.md v0.1.0 (human oversight owner)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-human-in-the-loop-intervention-rate — Human-in-the-Loop Intervention Rate (managed crosswalk: external/dea-mapping.yaml)"

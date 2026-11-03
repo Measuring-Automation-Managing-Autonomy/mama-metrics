@@ -63,3 +63,4 @@ adverse_use_warnings:
   - Never report distributional analysis only when it is flattering; absence of analysis on a required axis is itself reportable.
 references:
   - "mama-framework charter.md v0.1.0 principle 3; risk-value-interpretation.md §4"
+  - "Proposed as an OpenDEAM candidate record in CR-MET-021 (managed crosswalk: external/dea-mapping.yaml)"

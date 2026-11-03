@@ -47,3 +47,4 @@ adverse_use_warnings:
   - Never report averages only; percentiles or nothing.
 references:
   - "mama-framework architecture.md v0.1.0 (component 4: automation measurement)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-application-response-time — Application Response Time (managed crosswalk: external/dea-mapping.yaml)"

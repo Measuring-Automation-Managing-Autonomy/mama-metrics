@@ -54,3 +54,4 @@ adverse_use_warnings:
   - Never use STP as the sole gate for expanding autonomy grants; that is upstream `mama`'s review process with its own evidence rules.
 references:
   - "mama-framework risk-value-interpretation.md v0.1.0 §3–4"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-straight-through-processing-rate-automation — Straight-Through Processing Rate (Automation) (managed crosswalk: external/dea-mapping.yaml)"

@@ -51,3 +51,4 @@ adverse_use_warnings:
   - Never use falling escalations alone to justify widening delegated authority — expansion follows the upstream `mama` governance loop, not this metric.
 references:
   - "mama-framework integration-contract.md v0.1.0 (reviews stay in `mama`)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-escalation-rate-llm-to-human — Escalation Rate - LLM to Human (managed crosswalk: external/dea-mapping.yaml)"

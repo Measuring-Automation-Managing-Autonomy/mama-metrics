@@ -58,3 +58,4 @@ adverse_use_warnings:
   - Never suppress redress metrics during rollout reporting.
 references:
   - "mama-framework risk-value-interpretation.md v0.1.0 §4"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-customer-satisfaction-score — Customer Satisfaction Score (managed crosswalk: external/dea-mapping.yaml)"

@@ -51,3 +51,4 @@ adverse_use_warnings:
   - Never redefine success criteria mid-window to keep a trend line green.
 references:
   - "mama-framework templates/baseline-value-hypothesis.md v0.1.0"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-bot-success-rate — Bot Success Rate (managed crosswalk: external/dea-mapping.yaml)"

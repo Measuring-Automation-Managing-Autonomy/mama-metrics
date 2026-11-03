@@ -48,3 +48,4 @@ adverse_use_warnings:
   - Never present zero-incident windows as proof of resilience without drill evidence.
 references:
   - "mama-framework templates/risk-impact-review.md v0.1.0 (stop/rollback tests)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-mean-time-to-recovery — Mean Time to Recovery (managed crosswalk: external/dea-mapping.yaml)"

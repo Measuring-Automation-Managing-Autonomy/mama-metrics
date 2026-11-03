@@ -54,3 +54,4 @@ adverse_use_warnings:
   - Never relax quality criteria to make a rollout metric look good mid-window.
 references:
   - "mama-framework risk-value-interpretation.md v0.1.0 §4 (balanced reporting)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-first-pass-yield — First Pass Yield (managed crosswalk: external/dea-mapping.yaml)"
