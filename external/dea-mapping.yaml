@@ -8,9 +8,9 @@ reference:
   catalog_entity: dea:PerformanceMetric
   metamodel: technehub-labs/dea-metamodel v0.2.1
   catalog_license: Apache-2.0
-  pinned_commit: c2a2951a8a4f437817e293cd12593b4e70176f4d
+  pinned_commit: 7a2796ff49ae93fcb6f333e5f45bc9a4a063b7eb
   pinned_at: "2026-11-04"
-  upstream_change_request: CR-MET-021
+  upstream_change_request: CR-MET-021 (merged via PR #14)
 
 # relationship is stated from the MAMA card's perspective:
 #   aligns_with | narrows | broadens | proposes_upstream  (definitions in the policy doc)
@@ -209,4 +209,6 @@ mappings:
 
 revision_history:
   - date: "2026-11-04"
-    change: Initial crosswalk (13 rows) pinned to catalog commit c2a2951a8a4f437817e293cd12593b4e70176f4d; upstream back-references seeded via CR-MET-021.
+    change: Initial crosswalk (15 rows) pinned to catalog commit c2a2951a8a4f437817e293cd12593b4e70176f4d; upstream back-references seeded via CR-MET-021.
+  - date: "2026-11-04"
+    change: Re-pinned to 7a2796ff49ae93fcb6f333e5f45bc9a4a063b7eb — CR-MET-021 merged (PR #14); upstream external_references back-references now live on all 12 mapped records.
