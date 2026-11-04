@@ -2,6 +2,14 @@
 
 Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); semver.
 
+## [0.2.0] — 2026-11-04
+
+### Added
+
+- `cards/guardrail-drill-adherence.yaml` and `cards/incident-learning-closure.yaml` — practice-indicator cards supporting the framework's practice maturity model (ADR-004); ordinary cards, not ladder rungs
+- `tools/LICENSE` (Apache-2.0) and SPDX headers on both validators — `tools/` was already declared Apache-2.0 by the license policy but carried no license file
+- Taxonomy note locating the practice-indicator cards relative to the no-ladder rule
+
 ## [0.1.1] — 2026-11-04
 
 ### Added

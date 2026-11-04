@@ -1,0 +1,68 @@
+schema_version: "1.0.0"
+id: incident-learning-closure
+title: Incident learning closure
+version: "0.1.0"
+status: draft
+category: exceptions-reliability
+purpose: >
+  Describes whether the changes recommended by incident and near-miss reviews
+  actually ship and are verified — measuring the learning loop, not the
+  meeting. An organization can run flawless blameless reviews and change
+  nothing; this card catches that.
+decision_use: >
+  Informs operating-design and governance decisions: whether failure evidence
+  changes the system; input to the practice maturity model's incident-learning
+  dimension (stage 3+) and to review-gate decisions about trust in the
+  operating model.
+formula: >
+  (recommended changes from incident/near-miss reviews that were shipped and
+  verified in the window) / (all changes recommended by incident/near-miss
+  reviews that fell due in the window), expressed as percent. "Verified" means
+  the change's stated effect was checked (test, drill, or observed behavior) —
+  merged-but-unverified does not count.
+unit: percent
+denominator: >
+  All recommendations that reached their committed due date in the window,
+  across incidents and recorded near-misses for this use case. Recommendations
+  formally declined with a recorded rationale are excluded from the denominator
+  only if the decline decision is linked.
+inclusions:
+  - Changes from post-incident reviews, near-miss harvests, and drill findings with a named recommendation
+  - Verification by test, drill, or observed behavior, with the verification artifact linked
+exclusions:
+  - Recommendations with no due date (record them as unscheduled — a review that recommends nothing actionable is itself a finding)
+  - Formally declined recommendations with a linked rationale
+data_source: >
+  Incident/near-miss review records joined to the work items and verification
+  artifacts; requires review outcomes to be written and versioned.
+sampling: Census of recommendations falling due in the window
+time_window: Rolling 90 days
+owner_role: Review/learning process owner (distinct from the incident owner where possible)
+baseline_requirement: >
+  Record the pre-existing closure practice honestly — most organizations start
+  near zero because "shipped and verified" is stricter than "reviewed"; the
+  strictness is the point.
+target_guidance: >
+  Targets come from the learning-process design (e.g., "≥80% of due
+  recommendations shipped-and-verified within one quarter"), never from a
+  universal benchmark. Report the declined-with-rationale rate alongside — a
+  high decline rate is a governance signal, not a failure of this metric.
+uncertainty: >
+  Sensitive to what counts as "verified" and to recommendation granularity
+  (vague recommendations neither ship nor decline cleanly); report the review
+  record version and any recommendations still open past due with reasons.
+limitations:
+  - Closure measures loop discipline, not incident severity or frequency — pair with exception-rate and recovery-time.
+  - A high closure rate on low-consequence incidents can mask a low closure rate on consequential ones; report by severity tier when tiers exist.
+  - Not comparable across use cases with different review formats without normalization notes.
+review_cadence: Quarterly
+related_metrics:
+  - exception-rate
+  - recovery-time
+  - rework-rate
+adverse_use_warnings:
+  - Never present closure as safety — a closed recommendation can still be the wrong change; verification artifacts are the evidence, not the percentage.
+  - Never use this card as the sole gate for autonomy grant decisions; those belong to the upstream mama method's review process.
+references:
+  - "mama-framework maturity-model.md v0.2.0 dimension D-D (stage 3+)"
+  - "mama-framework templates/risk-impact-review.md v0.1.0 (review record source)"

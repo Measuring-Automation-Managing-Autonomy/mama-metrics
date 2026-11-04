@@ -14,6 +14,15 @@ MAMA's automation measurement is organized into seven categories. A card belongs
 | **human-customer-impact** | What happens to workers and customers? | worker-experience-impact, customer-impact |
 | **distributional** | Do outcomes and failures differ across affected groups? | distributional-effects |
 
+## Practice-indicator cards
+
+Two cards (`guardrail-drill-adherence`, `incident-learning-closure`) exist as
+evidence hooks for the framework's [practice maturity
+model](https://github.com/Measuring-Automation-Managing-Autonomy/mama-framework/blob/main/maturity-model.md)
+([ADR-004](https://github.com/Measuring-Automation-Managing-Autonomy/mama-framework/blob/main/decisions/adr-004-practice-maturity-model.md)).
+They are ordinary cards — not ladder rungs; the maturity model describes
+operating practice and never turns these (or any card) into a target or score.
+
 ## Rules
 
 1. **Categories are not a maturity ladder.** Moving work "down the list" is not progress; a use case may need distributional and impact measures from day one.
