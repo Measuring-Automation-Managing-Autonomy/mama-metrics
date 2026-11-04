@@ -29,8 +29,8 @@ This library maintains a managed cross-reference relationship with the [OpenDEAM
 
 ## Current state (2026-11-04)
 
-- 15 rows: 12 mapped (`aligns_with`/`narrows`/`broadens`), 3 `proposes_upstream` (automation-eligibility-share, worker-experience-impact, distributional-effects).
-- Upstream side: CR-MET-021 documents the relationship, defines the `external_references` item shape, and seeds back-references on the 12 mapped records.
+- 15 rows, **all mapped**: 12 cards ↔ existing DEA records (`aligns_with`/`narrows`/`broadens`), and 3 cards contributed upstream as candidate records via CR-MET-022 (automation-eligibility-share → `dea:metric-automation-eligibility-share`; worker-experience-impact → `dea:metric-automation-oversight-burden`, its oversight-burden component; distributional-effects → `dea:metric-outcome-disparity-ratio`, its headline construct).
+- Upstream side: CR-MET-021 (PR #14) documented the relationship, defined the `external_references` item shape, and seeded back-references on the 12 mapped records; CR-MET-022 (PR #15) contributed the 3 remaining cards as candidate records.
 - Validation: `python tools/validate_external_refs.py --catalog <local clone of the catalog>`; CI runs it against the pinned commit.
 
 ## Boundaries

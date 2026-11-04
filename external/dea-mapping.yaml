@@ -8,9 +8,9 @@ reference:
   catalog_entity: dea:PerformanceMetric
   metamodel: technehub-labs/dea-metamodel v0.2.1
   catalog_license: Apache-2.0
-  pinned_commit: 7a2796ff49ae93fcb6f333e5f45bc9a4a063b7eb
+  pinned_commit: b74f29ad5e59945aaacff43d2ea5cd477fc75b49
   pinned_at: "2026-11-04"
-  upstream_change_request: CR-MET-021 (merged via PR #14)
+  upstream_change_request: CR-MET-021 (PR #14) + CR-MET-022 (PR #15)
 
 # relationship is stated from the MAMA card's perspective:
 #   aligns_with | narrows | broadens | proposes_upstream  (definitions in the policy doc)
@@ -165,46 +165,47 @@ mappings:
     upstream_reference_added: true
     managed_since: "2026-11-04"
 
-  # --- Proposed upstream: no adequate DEA record exists yet (CR-MET-021) ----
+  # --- Contributed upstream as candidate records (CR-MET-022, PR #15) -------
   - mama_card: automation-eligibility-share
-    dea_record: null
-    dea_name: null
-    dea_lifecycle: null
-    relationship: proposes_upstream
-    cr_ref: CR-MET-021
+    dea_record: dea:metric-automation-eligibility-share
+    dea_name: Automation Eligibility Share
+    dea_lifecycle: candidate
+    relationship: aligns_with
     meaning_note: >-
-      Eligibility assessment share is a precondition construct; the closest DEA
-      records (Automation Ratio, Automation Potential Realized Rate) presuppose
-      an eligibility notion without defining its assessment. Proposed as a
-      candidate record.
-    upstream_reference_added: false
+      This card is the source of the OpenDEAM record (CR-MET-022); definitions
+      align. The card carries the automation-measurement reporting rules the
+      record cites: criteria-version pinning, assessment-coverage reporting,
+      and the exclusion of unassessed items.
+    upstream_reference_added: true
     managed_since: "2026-11-04"
 
   - mama_card: worker-experience-impact
-    dea_record: null
-    dea_name: null
-    dea_lifecycle: null
-    relationship: proposes_upstream
-    cr_ref: CR-MET-021
+    dea_record: dea:metric-automation-oversight-burden
+    dea_name: Automation Oversight Burden
+    dea_lifecycle: candidate
+    relationship: broadens
     meaning_note: >-
-      Closest DEA record is Employee Experience Score by Journey (narrower).
-      The MAMA card is a three-component construct (workload profile, oversight
-      burden, validated survey) with baseline-before-change and
-      small-population aggregation rules. Proposed as a candidate record.
-    upstream_reference_added: false
+      The card is a deliberate three-component view (workload profile, oversight
+      burden, validated survey) reported side by side, never summed; the OpenDEAM
+      record (CR-MET-022) is the oversight-burden component stated as a
+      standalone single construct. The record's event count does not replace the
+      card's survey or workload-profile components.
+    upstream_reference_added: true
     managed_since: "2026-11-04"
 
   - mama_card: distributional-effects
-    dea_record: null
-    dea_name: null
-    dea_lifecycle: null
-    relationship: proposes_upstream
-    cr_ref: CR-MET-021
+    dea_record: dea:metric-outcome-disparity-ratio
+    dea_name: Outcome Disparity Ratio
+    dea_lifecycle: candidate
+    relationship: broadens
     meaning_note: >-
-      Between-group outcome/failure distribution with small-cell suppression
-      and attribute-provenance rules; no DEA equivalent was found in the
-      catalog. Proposed as a candidate record.
-    upstream_reference_added: false
+      The card is the full distributional protocol (per-measure between-group
+      reporting, uncertainty-labelled indeterminate gaps, small-cell suppression,
+      attribute provenance); the OpenDEAM record (CR-MET-022) condenses the
+      headline construct into the max/min ratio with the protocol's preconditions
+      as validation rules. A ratio of 1.0 must still be read with the underlying
+      group rates.
+    upstream_reference_added: true
     managed_since: "2026-11-04"
 
 revision_history:
@@ -212,3 +213,5 @@ revision_history:
     change: Initial crosswalk (15 rows) pinned to catalog commit c2a2951a8a4f437817e293cd12593b4e70176f4d; upstream back-references seeded via CR-MET-021.
   - date: "2026-11-04"
     change: Re-pinned to 7a2796ff49ae93fcb6f333e5f45bc9a4a063b7eb — CR-MET-021 merged (PR #14); upstream external_references back-references now live on all 12 mapped records.
+  - date: "2026-11-04"
+    change: Re-pinned to b74f29ad5e59945aaacff43d2ea5cd477fc75b49 — CR-MET-022 merged (PR #15); the 3 proposes_upstream rows flipped to mapped (automation-eligibility-share → dea:metric-automation-eligibility-share; worker-experience-impact → dea:metric-automation-oversight-burden; distributional-effects → dea:metric-outcome-disparity-ratio). All 15 rows now mapped.

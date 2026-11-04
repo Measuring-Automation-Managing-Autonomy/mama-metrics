@@ -56,4 +56,4 @@ adverse_use_warnings:
   - Never report eligibility share as automation achievement.
 references:
   - "mama-framework charter.md v0.1.0 (automation measurement scope)"
-  - "Proposed as an OpenDEAM candidate record in CR-MET-021 (managed crosswalk: external/dea-mapping.yaml)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-automation-eligibility-share — Automation Eligibility Share (this card is the source record; CR-MET-022; managed crosswalk: external/dea-mapping.yaml)"

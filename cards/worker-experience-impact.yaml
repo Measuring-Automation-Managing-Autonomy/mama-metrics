@@ -63,4 +63,4 @@ adverse_use_warnings:
   - Never aggregate it into an automation success index (ADR-003); adverse findings are reported as findings.
 references:
   - "mama-framework roles.md v0.1.0 (affected stakeholder representative)"
-  - "Proposed as an OpenDEAM candidate record in CR-MET-021 (managed crosswalk: external/dea-mapping.yaml)"
+  - "OpenDEAM Performance Metrics Catalog: dea:metric-automation-oversight-burden — Automation Oversight Burden (this card's oversight-burden component as a standalone record; CR-MET-022; managed crosswalk: external/dea-mapping.yaml)"
