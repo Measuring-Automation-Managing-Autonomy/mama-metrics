@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
 """Validate the managed crosswalk to the OpenDEAM dea-catalog-metrics catalog.
 
 Usage:
