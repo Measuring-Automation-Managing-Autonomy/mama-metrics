@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/Measuring-Automation-Managing-Autonomy/mama-metrics/main/schema/metric-card.schema.json",
   "title": "MAMA metric card",
-  "description": "Versioned definition of one MAMA (Measuring Automation & Measuring Autonomy) automation/value/impact metric. Cards define measurement; they never prescribe universal targets and never mix with `mama` autonomy outputs.",
+  "description": "Versioned definition of one MAMA (Measuring Automation, Managing Autonomy) automation/value/impact metric. Cards define measurement; they never prescribe universal targets and never mix with `mama` autonomy outputs.",
   "type": "object",
   "required": [
     "schema_version",

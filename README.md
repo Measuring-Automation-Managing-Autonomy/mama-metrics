@@ -1,6 +1,6 @@
 # mama-metrics
 
-**MAMA** (Measuring Automation & Measuring Autonomy) — versioned metric taxonomy and automation/value/impact metric cards.
+**MAMA** (Measuring Automation, Managing Autonomy) — versioned metric taxonomy and automation/value/impact metric cards.
 
 **Status:** `draft` (v0.1.0) · **License:** CC-BY-4.0 · **Maintainer:** see [MAINTAINERS.md](MAINTAINERS.md)
 
